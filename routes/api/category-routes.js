@@ -7,7 +7,7 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll({
-      include: [{ model: Product },
+      include: [{ model: Product }],
     });
     res.status(200).json(categoryData);
   } catch (err) {
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update a category by its `id` value.
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const categoryData = await Category.update(req.body, {
       where: {
@@ -69,7 +69,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete a category by its `id` value.
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const categoryData = await Category.destroy({
       where: {
